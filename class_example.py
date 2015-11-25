@@ -30,21 +30,36 @@ class Drummer(Musician):
 
 class Band(Musician):
     """docstring for Band"""
-    def __init__(self):
-        super(Band, self).__init__()
+    def __init__(self,musicians):
+        super(Band, self).__init__(musicians)
+        self.musicians=musicians
 
-    def hire_musican():
-        pass
-    def fire_musican():
-        pass
+    def hire_musican(self,musician):
+        if musician not in self.musicians:
+            self.musicians.append(musician)
 
-    def play():
+    def fire_musican(self,musician):
+        if musician in self.musicians:
+            self.musicians.remove(musician)
+
+    def play(self):
         drummer=Drummer()
         drummer.solo(4)
-        
+
         
 
 if __name__ == '__main__':
-    drummer=Drummer()
-    drummer.solo(4)
-    print drummer.sounds
+    john = Guitarist()
+    paul = Bassist()
+    george = Guitarist()
+    ringo = Drummer()
+
+    band=Band([john,paul,ringo])
+    band.hire_musican(george)
+    george.tune()
+
+    band.play()
+
+    band.fire_musican(ringo)
+
+    band.play()
